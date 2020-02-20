@@ -18,21 +18,35 @@ class Wordpick:
             self.intt = randint(0, (self.lineCount-1))
         with open(file) as f:
             self.word = f.readlines()
+        self.pickedWord = self.word[self.intt]
+        print(self.pickedWord)
     def __str__(self):
-        return self.word[self.intt]
+        return self.pickedWord
 
 class Game:
     def __init__(self, file):
-        self.word = Wordpick('testwords.txt')
+        self.word = Wordpick('testwords.txt').pickedWord
         self.maxTurns = maxTurns
-        self.player = Player(self.word)
+        # self.player = Player(self.word)
         print("game ran")
+        Player(self.word)
 
 
 class Player:
     def __init__(self, pickedWord):
         self.word = pickedWord
         self.turnCount = 0
+        self.length =  len(self.word)
+        self.blanks = []
+        self.elements = [" __ "]
+        while len(self.blanks) != ((self.length)): self.blanks.extend(self.elements)
+        # print((len(self.blanks) % 2))
+        if (len(self.blanks) % 2) != 0:
+            self.blanks.pop(-1)
+        print("YOUR MYSTERY WORD")
+        print("".join(self.blanks))
+        print(len(self.blanks))
+
 
 
 
@@ -47,7 +61,7 @@ class GameStart:
             exit()
 
 
-
+GameStart()
 
 
 
