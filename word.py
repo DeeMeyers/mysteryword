@@ -8,10 +8,14 @@ wordLengthHard = 8
 alphabet = string.ascii_uppercase
 
 class Wordpick:
-    def __init__(self, file):
+    def __init__(self, file, difficulty):
         self.lineCount = 0
         self.word = ''
         self.intt = 0
+        self.dif = difficulty
+        if self.dif not in ['e', 'n', 'h']:
+            print('bad input')
+            GameStart()
         # i will add a sort here for different difficulties
         # if i can make that its own file i can use the same methods below
         with open(file, 'r') as f:
@@ -27,8 +31,8 @@ class Wordpick:
 
 
 class Game:
-    def __init__(self, file):
-        self.word = Wordpick('testwords.txt').pickedWord
+    def __init__(self, file, dif):
+        self.word = Wordpick('words.txt', dif).pickedWord
         self.maxTurns = maxTurns
         Player(self.word)
 
@@ -43,9 +47,6 @@ class Player:
         self.blanks = []
         self.elements = [" __ "]
         while len(self.blanks) != ((self.length)): self.blanks.extend(self.elements)
-        # print((len(self.blanks) % 2))
-        # if (len(self.blanks) % 2) != 0:
-        #     self.blanks.pop(-1)
         while self.turnCount < 8:
             print("YOUR MYSTERY WORD")
             print("".join(self.blanks))
@@ -84,7 +85,8 @@ class GameStart:
     def __init__(self):
         start = input("Do you wanna (g)o or what?")
         if start == "g":
-            Game('testwords.txt')
+            dif = input("cool beanz. Do you want (e)asy, (n)ormal, or (h)ard?")
+            Game('testwords.txt', dif)
         else:
             print("booooooooooo!")
             exit()
