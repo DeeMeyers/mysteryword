@@ -72,7 +72,7 @@ class Player:
             print("".join(self.blanks)==self.word.upper())
             if prompt not in alphabet:
                 print("I appreciate your lack of respect for the rules but now is not the time")
-                # GameStart()
+                GameStart()
             elif prompt not in self.word.upper():
                 print('bad guess bub!')
                 self.turnCount += 1
@@ -103,7 +103,7 @@ class GameStart:
         start = input("Do you wanna (g)o or what?")
         if start == "g":
             dif = input("cool beanz. Do you want (e)asy, (n)ormal, or (h)ard?")
-            Game('testwords.txt', dif)
+            Game('words.txt', dif)
         else:
             print("booooooooooo!")
             exit()
