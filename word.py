@@ -1,9 +1,11 @@
 from random import randint
+import string
 maxTurns = 8
 startingTurns = 0
 wordLengthEasy = [4,6]
 wordLengthNormal = [6,8]
 wordLengthHard = 8
+alphabet = string.ascii_uppercase
 
 class Wordpick:
     def __init__(self, file):
@@ -22,6 +24,7 @@ class Wordpick:
         print(self.pickedWord)
     def __str__(self):
         return self.pickedWord
+
 
 class Game:
     def __init__(self, file):
@@ -43,12 +46,22 @@ class Player:
         # print((len(self.blanks) % 2))
         if (len(self.blanks) % 2) != 0:
             self.blanks.pop(-1)
-        print("YOUR MYSTERY WORD")
-        print("".join(self.blanks))
-        print(len(self.blanks))
-
-
-
+        while self.turnCount < 8:
+            print("YOUR MYSTERY WORD")
+            print("".join(self.blanks))
+            print(len(self.blanks))
+            prompt = input('Please guess a letter and only a letter: ')
+            prompt = prompt.upper()
+            print(self.word)
+            if prompt not in alphabet:
+                print("I appreciate your lack of respect for the rules but now is not the time")
+                GameStart()
+            elif prompt not in self.word.upper():
+                print('bad guess bub!')
+                self.turnCount += 1
+                print(f'you have {maxTurns - self.turnCount} turns left')
+            else:
+                print('right guess')
 
 
 class GameStart:
@@ -62,7 +75,3 @@ class GameStart:
 
 
 GameStart()
-
-
-
-
