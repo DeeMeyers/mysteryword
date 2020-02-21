@@ -3,9 +3,6 @@ from random import choice
 import string
 maxTurns = 8
 startingTurns = 0
-wordLengthEasy = [4,6]
-wordLengthNormal = [6,8]
-wordLengthHard = 8
 alphabet = string.ascii_uppercase
 
 class Wordpick:
@@ -98,6 +95,7 @@ class Player:
             print('byeeeeeeee')
             exit()
 
+
 class GameStart:
     def __init__(self):
         start = input("Do you wanna (g)o or what?")
@@ -107,6 +105,5 @@ class GameStart:
         else:
             print("booooooooooo!")
             exit()
-
 
 GameStart()
