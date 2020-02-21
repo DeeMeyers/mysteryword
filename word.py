@@ -28,18 +28,18 @@ class Wordpick:
 
 class Game:
     def __init__(self, file):
-        self.word = Wordpick('testwords.txt').pickedWord
+        self.word = Wordpick('words.txt').pickedWord
         self.maxTurns = maxTurns
-        # self.player = Player(self.word)
-        print("game ran")
         Player(self.word)
 
 
 class Player:
     def __init__(self, pickedWord):
         self.word = pickedWord
+        print(self.word)
         self.turnCount = 0
         self.length =  len(self.word)
+        print(self.length)
         self.blanks = []
         self.elements = [" __ "]
         while len(self.blanks) != ((self.length)): self.blanks.extend(self.elements)
@@ -49,10 +49,9 @@ class Player:
         while self.turnCount < 8:
             print("YOUR MYSTERY WORD")
             print("".join(self.blanks))
-            print(len(self.blanks))
             prompt = input('Please guess a letter and only a letter: ')
             prompt = prompt.upper()
-            print(self.word)
+            print("".join(self.blanks)==self.word.upper())
             if prompt not in alphabet:
                 print("I appreciate your lack of respect for the rules but now is not the time")
                 GameStart()
@@ -61,8 +60,25 @@ class Player:
                 self.turnCount += 1
                 print(f'you have {maxTurns - self.turnCount} turns left')
             else:
-                print('right guess')
-
+                print('You got it!')
+                posList = [i for i in range(self.length) if self.word[i].upper() == prompt]
+                for idx in posList:
+                    self.blanks[idx] = prompt
+                if self.word.upper() == ("".join(self.blanks)):
+                    print("You Win!")
+                    pa = input("Play again? (y/n)")
+                    if pa == "y":
+                        GameStart()
+                    else: 
+                        print('byeeeeeeee')
+                        exit()
+        print("You Loose!")
+        pa = input("Play again? (y/n)")
+        if pa == "y":
+            GameStart()
+        else: 
+            print('byeeeeeeee')
+            exit()
 
 class GameStart:
     def __init__(self):
