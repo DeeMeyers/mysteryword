@@ -1,4 +1,5 @@
 from random import randint
+from random import choice
 import string
 maxTurns = 8
 startingTurns = 0
@@ -13,19 +14,35 @@ class Wordpick:
         self.word = ''
         self.intt = 0
         self.dif = difficulty
+        self.eList = []
+        self.nList = []
+        self.hList = []
         if self.dif not in ['e', 'n', 'h']:
             print('bad input')
             GameStart()
-        # i will add a sort here for different difficulties
-        # if i can make that its own file i can use the same methods below
         with open(file, 'r') as f:
             for line in f:
                 self.lineCount += 1
-            self.intt = randint(0, (self.lineCount-1))
         with open(file) as f:
             self.word = f.readlines()
-        self.pickedWord = self.word[self.intt]
-        print(self.pickedWord)
+        if self.dif == 'e':
+            print('you picked easy')
+            with open(file) as f:
+                self.eList = [i for i in range(self.lineCount) if len(self.word[i].strip()) <= 6 and len(self.word[i].strip()) >= 4]
+            self.pickedWord = self.word[choice(self.eList)]
+            print(self.pickedWord)
+        if self.dif == 'n':
+            print('you picked normal')
+            with open(file) as f:
+                self.nList = [i for i in range(self.lineCount) if len(self.word[i].strip()) <= 8 and len(self.word[i].strip()) >= 6]
+            self.pickedWord = self.word[choice(self.nList)]
+            print(self.pickedWord)
+        if self.dif == 'h':
+            print('you picked hard')
+            with open(file) as f:
+                self.hList = [i for i in range(self.lineCount) if len(self.word[i].strip()) >= 8]
+            self.pickedWord = self.word[choice(self.hList)]
+            print(self.pickedWord)
     def __str__(self):
         return self.pickedWord
 
@@ -55,7 +72,7 @@ class Player:
             print("".join(self.blanks)==self.word.upper())
             if prompt not in alphabet:
                 print("I appreciate your lack of respect for the rules but now is not the time")
-                GameStart()
+                # GameStart()
             elif prompt not in self.word.upper():
                 print('bad guess bub!')
                 self.turnCount += 1
