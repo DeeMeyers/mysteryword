@@ -28,14 +28,14 @@ class Wordpick:
 
 class Game:
     def __init__(self, file):
-        self.word = Wordpick('words.txt').pickedWord
+        self.word = Wordpick('testwords.txt').pickedWord
         self.maxTurns = maxTurns
         Player(self.word)
 
 
 class Player:
     def __init__(self, pickedWord):
-        self.word = pickedWord
+        self.word = pickedWord.strip()
         print(self.word)
         self.turnCount = 0
         self.length =  len(self.word)
@@ -44,8 +44,8 @@ class Player:
         self.elements = [" __ "]
         while len(self.blanks) != ((self.length)): self.blanks.extend(self.elements)
         # print((len(self.blanks) % 2))
-        if (len(self.blanks) % 2) != 0:
-            self.blanks.pop(-1)
+        # if (len(self.blanks) % 2) != 0:
+        #     self.blanks.pop(-1)
         while self.turnCount < 8:
             print("YOUR MYSTERY WORD")
             print("".join(self.blanks))
