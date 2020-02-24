@@ -27,19 +27,19 @@ class Wordpick:
             with open(file) as f:
                 self.eList = [i for i in range(self.lineCount) if len(self.word[i].strip()) <= 6 and len(self.word[i].strip()) >= 4]
             self.pickedWord = self.word[choice(self.eList)]
-            print(self.pickedWord)
+            # print(self.pickedWord)
         if self.dif == 'n':
             print('you picked normal')
             with open(file) as f:
                 self.nList = [i for i in range(self.lineCount) if len(self.word[i].strip()) <= 8 and len(self.word[i].strip()) >= 6]
             self.pickedWord = self.word[choice(self.nList)]
-            print(self.pickedWord)
+            # print(self.pickedWord)
         if self.dif == 'h':
             print('you picked hard')
             with open(file) as f:
                 self.hList = [i for i in range(self.lineCount) if len(self.word[i].strip()) >= 8]
             self.pickedWord = self.word[choice(self.hList)]
-            print(self.pickedWord)
+            # print(self.pickedWord)
     def __str__(self):
         return self.pickedWord
 
@@ -54,10 +54,10 @@ class Game:
 class Player:
     def __init__(self, pickedWord):
         self.word = pickedWord.strip()
-        print(self.word)
+        # print(self.word)
         self.turnCount = 0
         self.length =  len(self.word)
-        print(self.length)
+        # print(self.length)
         self.blanks = []
         self.elements = [" __ "]
         while len(self.blanks) != ((self.length)): self.blanks.extend(self.elements)
@@ -66,7 +66,7 @@ class Player:
             print("".join(self.blanks))
             prompt = input('Please guess a letter and only a letter: ')
             prompt = prompt.upper()
-            print("".join(self.blanks)==self.word.upper())
+            # print("".join(self.blanks)==self.word.upper())
             if prompt not in alphabet:
                 print("I appreciate your lack of respect for the rules but now is not the time")
                 GameStart()
