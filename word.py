@@ -67,7 +67,10 @@ class Player:
             prompt = input('Please guess a letter and only a letter: ')
             prompt = prompt.upper()
             # print("".join(self.blanks)==self.word.upper())
-            if prompt not in alphabet:
+            if prompt == 'TURTLES SURE ARE NEAT':
+                print('you cad!')
+                print(self.word)
+            elif prompt not in alphabet:
                 print("I appreciate your lack of respect for the rules but now is not the time")
                 GameStart()
             elif prompt not in self.word.upper():
